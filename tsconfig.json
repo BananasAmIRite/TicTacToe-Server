@@ -14,11 +14,9 @@
     "skipDefaultLibCheck": true,
     "resolveJsonModule": true,
     "importHelpers": true,
-    "strictNullChecks": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "noImplicitOverride": true,
-    "strictPropertyInitialization": true
+    "noImplicitOverride": true
   },
 
   "include": ["./src/**/*"],
