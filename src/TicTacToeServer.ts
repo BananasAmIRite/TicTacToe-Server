@@ -1,21 +1,23 @@
-import WebSocket, { Server as WebSocketServer } from 'ws';
+import { Server } from 'ws';
 import ConnectionManager from './ConnectionManager';
 import GameManager from './GameManager';
 import Queue from './Queue';
 import Utils from './utils';
 
-export default class Server {
-  server: WebSocketServer;
+export default class TicTacToeServer {
+  server: Server;
   connections: ConnectionManager;
   queue: Queue;
   games: GameManager;
   constructor(port: number) {
-    this.server = new WebSocketServer({ port });
+    this.server = new Server({ port });
     this.connections = new ConnectionManager();
     this.queue = new Queue(this);
     this.games = new GameManager();
 
     this.setupEvents();
+
+    console.log(`Websocket Server listening on port: ${port}`);
   }
 
   private setupEvents() {
@@ -25,7 +27,10 @@ export default class Server {
       ws.send(`SETID ${uId}`);
 
       // register the connection
-      this.connections.createConnection(uId, ws);
+      const conn = this.connections.createConnection(uId, ws);
+
+      // add to queue
+      this.queue.addToQueue(conn);
     });
   }
 }

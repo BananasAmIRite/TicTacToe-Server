@@ -1,6 +1,5 @@
 import Connection from './Connection';
-import Game from './Game';
-import Server from './Server';
+import Server from './TicTacToeServer';
 
 export default class Queue {
   server: Server;
