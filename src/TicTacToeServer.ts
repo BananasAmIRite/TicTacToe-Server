@@ -27,7 +27,6 @@ export default class TicTacToeServer {
 
       // create a unique id for the connection
       const uId = Utils.generateID(); // with this ID generation method, there IS the problem of asynchronous access, so I'm gonna make this event synchronous for now until I find a better method
-      console.log(uId);
 
       // ws.send(`SETID ${uId}`);
 
