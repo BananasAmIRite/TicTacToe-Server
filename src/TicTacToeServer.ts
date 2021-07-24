@@ -22,9 +22,20 @@ export default class TicTacToeServer {
 
   private setupEvents() {
     this.server.on('connection', (ws) => {
+      // ws.close();
+      // ws.send('e');
+
       // create a unique id for the connection
       const uId = Utils.generate16Key();
-      ws.send(`SETID ${uId}`);
+      // ws.send(`SETID ${uId}`);
+
+      // ws.on('message', (msg) => {
+      //   console.log(msg.toString());
+      // });
+      // ws.on('close', (code, reason) => {
+      //   console.log(`socket closed: ${code}`);
+      //   console.log(`reason: ${reason}`);
+      // });
 
       // register the connection
       const conn = this.connections.createConnection(uId, ws);
