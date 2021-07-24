@@ -15,7 +15,6 @@ export default class Connection {
   }
 
   private setupEvts() {
-    // TODO: handle messages
     this.websocket.on('close', () => {
       this.manager.removeConnection(this.id); // NOTE to Bananas, this may be called twice cuz close() evt and stuff so maybe remove the other one if it calls twice
     });
