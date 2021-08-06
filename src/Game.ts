@@ -28,7 +28,12 @@ export default class Game {
   ];
   // p1: X, p2: O
   constructor(c1: Connection, c2: Connection, manager: GameManager) {
+    // this is the actual game
     // TODO: implement player leave and move events
+
+    c1.wsocket.send(`STARTGAME`);
+    c2.wsocket.send(`STARTGAME`);
+
     this.p1 = new Player(c1, 'X');
     this.p2 = new Player(c2, 'O');
     this.manager = manager;
@@ -55,9 +60,6 @@ export default class Game {
     this.p2.connection.wsocket.on('message', (data) => {
       this.handleMessage(data, this.p2);
     });
-
-    this.p1.connection.wsocket.send(`STARTGAME`);
-    this.p2.connection.wsocket.send(`STARTGAME`);
   }
 
   private setupBoard() {

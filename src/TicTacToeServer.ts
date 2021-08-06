@@ -6,9 +6,9 @@ import Utils from './utils';
 
 export default class TicTacToeServer {
   server: Server;
-  connections: ConnectionManager;
-  queue: Queue;
-  games: GameManager;
+  connections: ConnectionManager; // a map of connections and their unique ids
+  queue: Queue; // manager for a queue for the game. creates a new game when 2 players have joined
+  games: GameManager; // manager for all the games
   constructor(port: number) {
     this.server = new Server({ port });
     this.connections = new ConnectionManager();
@@ -28,11 +28,14 @@ export default class TicTacToeServer {
       // create a unique id for the connection
       const uId = Utils.generateID(); // with this ID generation method, there IS the problem of asynchronous access, so I'm gonna make this event synchronous for now until I find a better method
 
-      // ws.send(`SETID ${uId}`);
+      console.log('connection nice');
 
-      // ws.on('message', (msg) => {
-      //   console.log(msg.toString());
-      // });
+      // ws.send(`SETID ${uId}`);
+      ws.send('test message');
+
+      ws.on('message', (msg) => {
+        console.log(msg.toString());
+      });
       // ws.on('close', (code, reason) => {
       //   console.log(`socket closed: ${code}`);
       //   console.log(`reason: ${reason}`);
